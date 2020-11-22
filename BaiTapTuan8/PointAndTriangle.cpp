@@ -99,6 +99,7 @@ int main()
     cout << "\nTam giac co dien tich lon nhat:" << endl;
     tmax.in();
     cout << "Dien Tich=" << tmax.Area() << endl;
+    delete[] d;
     system("pause");
     return 0;
 }
