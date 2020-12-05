@@ -2,6 +2,9 @@
     "files.associations": {
         "*.json": "json",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "new": "cpp",
+        "cmath": "cpp"
     }
 }

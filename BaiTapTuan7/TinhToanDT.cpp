@@ -11,20 +11,22 @@ ostream &operator<<(ostream &os, DT d) // in da thuc
 {
     for (int i = 0; i <= d.n; i++)
     {
-        cout << d.a[i] << "x^" << i;
+        os << d.a[i] << "x^" << d.n - i;
         if (i != d.n)
-            cout << " + ";
+            os << " + ";
     }
+    return os;
 }
 istream &operator>>(istream &is, DT &d) // nhap da thuc
 {
     cout << "Nhap bac cua da thuc:";
-    cin >> d.n;
+    is >> d.n;
     cout << "Nhap he so cua da thuc:";
     for (int i = 0; i <= d.n; i++)
     {
-        cin >> d.a[i];
+        is >> d.a[i];
     }
+    return is;
 }
 DT operator-(const DT &d) // dao dau da thuc
 {

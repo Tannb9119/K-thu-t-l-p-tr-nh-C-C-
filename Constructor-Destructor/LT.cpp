@@ -1,15 +1,19 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class vector {
-	int n; 
-	float* v;
-public :
-	vector() {
+class vector
+{
+	int n;
+	float *v;
+
+public:
+	vector()
+	{
 		int i;
 		cout << " Su dung ham tao khong doi:" << endl;
 		cout << "Tao doi tuong :" << this << endl;
-		cout << "So chieu:"; cin >> n;
+		cout << "So chieu:";
+		cin >> n;
 		v = new float[n];
 		cout << "Xin cap phat bo nho " << n << " so thuc tai: " << v << endl;
 		for (int i = 0; i < n; i++)
@@ -33,7 +37,7 @@ public :
 			cin >> v[i];
 		}
 	}
-	vector(int size, float* a)
+	vector(int size, float *a)
 	{
 		int i;
 		cout << " Su dung ham tao 2 doi:" << endl;
@@ -47,37 +51,44 @@ public :
 			v[i] = a[i];
 		}
 	}
-	vector(vector &b) {
+	vector(const vector &b)
+	{
 		int i;
 		cout << "Su dung ham tao sao chep:" << endl;
 		cout << "Tao doi tuong" << this << endl;
 		v = new float[n = b.n];
 		cout << "Xin cap phat bo nho" << n << " so thuc hien tai" << v << endl;
-		
-		for (int i = 0; i < n; i++) {
+
+		for (int i = 0; i < n; i++)
+		{
 			v[i] = b.v[i];
 		}
-
 	}
-	~vector() {
+	~vector()
+	{
 		cout << "\ncap phat bo nho " << n << " so thuc tai : " << v << endl;
 		delete[] v;
 	}
-	void display() {
+	void display()
+	{
 		int i;
 		cout << "Doi tuong tai :" << this << endl;
 		cout << "So chieu :" << n << endl;
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++)
+		{
 			cout << v[i] << " ";
 		}
 	}
-	vector& operator=(const vector& a) {
-		if (n != a.n) {
+	vector &operator=(const vector &a)
+	{
+		if (n != a.n)
+		{
 			delete[] v;
 			n = a.n;
 			v = new float[n];
 		}
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++)
+		{
 			v[i] = a.v[i];
 		}
 		return *this;
@@ -86,17 +97,18 @@ public :
 
 int main()
 {
-	float a[3] = { 1 ,2 , 3 };
+	float a[3] = {1, 2, 3};
 	vector v1;
 	v1.display();
-	cout << "\n" << endl;
+	cout << "\n";
 	vector v2(2);
 	v2.display();
-	cout <<"\n"<<endl;
+	cout << "\n";
 	vector v3(2, a);
 	v3.display();
-	cout << "\n" << endl;
+	cout << "\n";
 	vector v4(v1);
 	v4.display();
 	cout << endl;
+	system("pause");
 }
