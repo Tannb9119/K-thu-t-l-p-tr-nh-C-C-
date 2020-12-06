@@ -64,7 +64,7 @@ public:
         s = sqrt((p - a) * (p - b) * (p - c) * p);
         return s;
     }
-    TamGiac maxdt(TamGiac t2)
+    TamGiac &maxdt(TamGiac t2)
     {
         if (this->Area() > t2.Area())
             return *this;
