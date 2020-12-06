@@ -31,14 +31,6 @@ public:
     void display(); //Hien thi
 };
 
-void ChinhSua(double *a, int k, int n) // cap phat lai bo nho
-{
-    a = (double *)realloc(a, n * sizeof(double));
-    for (int i = 0; i <= n; i++)
-        if (i > k)
-            a[i] = 0;
-}
-
 void DT::display()
 {
     cout << "Doi tuong tai:" << this << endl;
@@ -80,9 +72,9 @@ DT &DT::operator=(const DT &d)
 {
     if (n != d.n)
     {
-        free(a);
+        delete[] a;
         n = d.n;
-        a = (double *)malloc((n + 1) * sizeof(double));
+        a = new double[n + 1];
     }
     for (int i = 0; i <= d.n; i++)
     {
@@ -95,7 +87,7 @@ ostream &operator<<(ostream &os, DT &d)
 {
     for (int i = 0; i <= d.n; i++)
     {
-        os << d.a[i] << "x^" << d.n - i;
+        os << d.a[i] << "x^" << i;
         if (i != d.n)
             os << " + ";
     }
@@ -106,7 +98,7 @@ istream &operator>>(istream &is, DT &d)
 {
     cout << "Nhap bac cua da thuc:";
     is >> d.n;
-    d.a = (double *)malloc((d.n + 1) * sizeof(double));
+    d.a = new double[d.n + 1];
     cout << "Nhap he so cua da thuc:";
     for (int i = 0; i <= d.n; i++)
     {
@@ -125,32 +117,44 @@ DT &DT::operator-()
 DT DT::operator+(DT &d)
 {
     DT d1;
-    d1.n = (n > d.n) ? n : d.n;
-    d1.a = (double *)malloc((d1.n + 1) * sizeof(double));
-    if (n != d1.n)
-        ChinhSua(a, n, d1.n);
-    if (d.n != d1.n)
-        ChinhSua(d.a, d.n, d1.n);
-    for (int i = 0; i <= d1.n; i++)
+    int i, k;
+    k = (n > d.n) ? n : d.n;
+    d1.a = new double[k + 1];
+    for (i = 0; i <= k; i++)
     {
-        d1.a[i] = d.a[i] + a[i];
+        if (i <= n && i <= d.n)
+            d1.a[i] = d.a[i] + a[i];
+        else if (i <= n)
+            d1.a[i] = a[i];
+        else
+            d1.a[i] = d.a[i];
     }
+    i--;
+    while (i > 0 && d1.a[i] == 0)
+        i--;
+    d1.n = i;
     return d1;
 }
 
 DT DT::operator-(DT &d)
 {
     DT d1;
-    d1.n = (n > d.n) ? n : d.n;
-    d1.a = (double *)malloc((d1.n + 1) * sizeof(double));
-    if (n != d1.n)
-        ChinhSua(a, n, d1.n);
-    if (d.n != d1.n)
-        ChinhSua(d.a, d.n, d1.n);
-    for (int i = 0; i <= d1.n; i++)
+    int i, k;
+    k = (n > d.n) ? n : d.n;
+    d1.a = new double[k + 1];
+    for (i = 0; i <= k; i++)
     {
-        d1.a[i] = a[i] - d.a[i];
+        if (i <= n && i <= d.n)
+            d1.a[i] = a[i] - d.a[i];
+        else if (i <= n)
+            d1.a[i] = a[i];
+        else
+            d1.a[i] = -d.a[i];
     }
+    i--;
+    while (i > 0 && d1.a[i] == 0)
+        i--;
+    d1.n = i;
     return d1;
 }
 
@@ -158,7 +162,7 @@ DT DT::operator*(const DT &d)
 {
     DT d1;
     d1.n = d.n + n;
-    d1.a = (double *)malloc((d1.n + 1) * sizeof(double));
+    d1.a = new double[d1.n + 1];
     for (int i = 0; i <= d1.n; i++)
         d1.a[i] = 0;
     for (int i = 0; i <= n; i++)
@@ -176,7 +180,7 @@ double DT::operator^(const double &x)
     double p = 0;
     for (int i = 0; i <= this->n; i++)
     {
-        p += pow(x, this->n - i) * this->a[i];
+        p += pow(x, i) * this->a[i];
     }
     return p;
 }
@@ -193,10 +197,9 @@ double F(DT p, double x)
 {
     double a = 0;
     int n = p.getN();
-    double *b = p.getPtr();
     for (int i = 0; i <= n; i++)
     {
-        a += pow(x, n - i) * b[i];
+        a += pow(x, i) * p[i];
     }
     return a;
 }

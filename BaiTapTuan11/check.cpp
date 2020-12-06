@@ -4,10 +4,22 @@ using namespace std;
 
 void ChinhSua(double *a, int k, int n) // cap phat lai bo nho
 {
-    a = (double *)realloc(a, n * sizeof(double));
+    double b[k];
+    for (int i = 0; i < k; i++)
+    {
+        b[i] = a[i];
+    }
+    delete[] a;
+    a = new double[n];
     for (int i = 0; i < n; i++)
-        if (i >= k)
+    {
+        if (i < k)
+            a[i] = b[i];
+        else
+        {
             a[i] = 0;
+        }
+    }
 }
 
 int main()
