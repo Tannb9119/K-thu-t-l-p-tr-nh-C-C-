@@ -37,6 +37,7 @@ TS &TS::operator=(const TS &a)
 {
     strcpy(name, a.name);
     mark = a.mark;
+    return *this;
 }
 
 void TS::nhap()

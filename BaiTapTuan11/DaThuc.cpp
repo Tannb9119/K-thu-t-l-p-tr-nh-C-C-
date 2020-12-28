@@ -26,7 +26,7 @@ public:
     ~DT()                                           // Ham huy
     {
         cout << "Huy bo nho " << n + 1 << " so thuc tai: " << a << " cua doi tuong: " << this << endl;
-        free(a);
+        delete[] a;
     }
     void display(); //Hien thi
 };
@@ -61,7 +61,7 @@ DT::DT()
 DT::DT(const DT &d)
 {
     this->n = d.n;
-    this->a = (double *)malloc((n + 1) * sizeof(double));
+    this->a = new double[n + 1];
     for (int i = 0; i <= n; i++)
     {
         a[i] = d.a[i];

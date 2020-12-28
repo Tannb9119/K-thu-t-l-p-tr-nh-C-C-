@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.json": "json",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     }
 }
