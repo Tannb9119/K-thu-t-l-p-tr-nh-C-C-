@@ -1,5 +1,3 @@
-#ifndef _PERSON_H
-#define _PERSON_H
 #include <iostream>
 #include <string>
 using namespace std;
@@ -19,4 +17,3 @@ public:
     void set_gender(string);
     void display();
 };
-#endif

@@ -3,7 +3,7 @@ Person::Person(string _name, int _age, string _gender)
 {
     name = _name;
     age = _age;
-    gender = _gender;
+    sex = _gender;
 }
 string Person::get_name() { return name; }
 void Person::set_name(string _name) { name = _name; }

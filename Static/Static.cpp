@@ -47,6 +47,7 @@ int main()
 	HDBH h2((char *)"Sat thep", 3008);
 	HDBH h3((char *)"Xi mang", 4008);
 	HDBH::in();
+	h1.sua();
 	HDBH::in();
 	HDBH::in();
 	cout << endl;
